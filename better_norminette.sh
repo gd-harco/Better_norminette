@@ -1,12 +1,11 @@
-var_error=$(norminette | grep "Error")
-result=$(echo $var_error | wc -l)
+#!/bin/sh
+result=$(norminette | grep "Error"| wc -l)
 
-if [ $result -eq 0 ]
+if [ "$result" -eq 0 ]
 then
-	printf "NORME OK!"
+	echo "NORME OK!"
 else
-	norminette | grep "Error" > result.txt
-	cat result.txt
-	rm -f result.txt
-
+	norminette | grep "Error" > .norminette_result.log
+	cat .norminette_result.log
+	rm -f .norminette_result.log
 fi
